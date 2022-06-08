@@ -1,0 +1,29 @@
+name: Go
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+
+    - name: Build
+      run: CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o xshell2windterm.exe xshell2windterm.go
+
+    - name: Release
+      uses: softprops/action-gh-release@v0.1.14
+      with:
+        tag_name: v1.0
+        files: | 
+            xshell2windterm.exe
