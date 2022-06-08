@@ -141,4 +141,5 @@ func saveToJson(session []Session, targetFile string) {
 	bytes, _ := json.MarshalIndent(session, "", "  ")
 	f.Write(bytes)
 	log.Printf("Saved %s", targetFile)
+	log.Printf("Note: You need to manually update the identity file path in %s", targetFile)
 }
