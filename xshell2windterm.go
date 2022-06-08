@@ -12,6 +12,20 @@ import (
 	"github.com/google/uuid"
 )
 
+type Session struct {
+	UUID               string `json:"session.uuid"`
+	Group              string `json:"session.group"`
+	Label              string `json:"session.label"`
+	Port               int    `json:"session.port"`
+	Protocol           string `json:"session.protocol"`
+	Target             string `json:"session.target"`
+	IdentityFilePath   string `json:"ssh.identityFilePath"`
+	Icon               string `json:"session.icon"`
+	AutoLogin          string `json:"session.autoLogin"`
+	KeepAlive          int    `json:"session.keepAlive"`
+	EnableTcpKeepAlive bool   `json:"session.tcpKeepAlive"`
+}
+
 func main() {
 	xshellSessionDIR := flag.String("i", "", "Xshell session directory")
 	windTermUserFile := flag.String("o", "user.sessions", "WindTerm user file")
@@ -42,22 +56,12 @@ func main() {
 		session.Group = getGroup(*xshellSessionDIR, xshFile)
 		session.Icon = "session::square-mediumorchid"
 		session.Protocol = "SSH"
+		session.EnableTcpKeepAlive = true
+		session.KeepAlive = 60
 		windTerm = append(windTerm, session)
 	}
 	saveToJson(windTerm, *windTermUserFile)
 
-}
-
-type Session struct {
-	UUID             string `json:"session.uuid"`
-	Group            string `json:"session.group"`
-	Label            string `json:"session.label"`
-	Port             int    `json:"session.port"`
-	Protocol         string `json:"session.protocol"`
-	Target           string `json:"session.target"`
-	IdentityFilePath string `json:"ssh.identityFilePath"`
-	Icon             string `json:"session.icon"`
-	AutoLogin        string `json:"session.autoLogin"`
 }
 
 func NewUUID() string {
