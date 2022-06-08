@@ -127,7 +127,8 @@ func getLable(xshFile string) string {
 func getGroup(basePath, xshFile string) string {
 	group := filepath.Dir(xshFile)
 	group = strings.ReplaceAll(group, basePath, "")
-	return strings.ReplaceAll(group, "\\", ">")
+	group = strings.ReplaceAll(group, "\\", ">")
+	return strings.TrimPrefix(group, ">")
 }
 
 func saveToJson(session []Session, targetFile string) {
