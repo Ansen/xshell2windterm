@@ -9,7 +9,10 @@ go build xshell2windterm.go
 ./xshell2windterm -h
 # convert
 ./xshell2windterm -i "C:\Users\administrator\Documents\NetSarang Computer\6\Xshell\Sessions"
+# import to windterm
+mv `user.sessions` `${ProfilesDirectory}/.wind/profiles/default.v10/terminal/
 ```
+
 
 > Note
 
