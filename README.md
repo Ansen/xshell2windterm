@@ -2,6 +2,8 @@ Convert xshell sessions config to WindTerm sessions config.
 
 ## Build and Usage
 
+> Note: Please Backup origin user.sessions file at first
+
 ```bash
 # build
 go build xshell2windterm.go
@@ -9,8 +11,12 @@ go build xshell2windterm.go
 ./xshell2windterm -h
 # convert
 ./xshell2windterm -i "C:\Users\administrator\Documents\NetSarang Computer\6\Xshell\Sessions"
+
+# Note: Please Backup origin user.sessions file at first
+# Backup origin user.sessions
+cp ${ProfilesDirectory}/.wind/profiles/default.v10/terminal/user.sessions user.sessions.backup_$(date "+%Y%m%d")
 # import to windterm
-mv `user.sessions` `${ProfilesDirectory}/.wind/profiles/default.v10/terminal/
+cp -f user.sessions ${ProfilesDirectory}/.wind/profiles/default.v10/terminal/user.sessions
 ```
 
 
